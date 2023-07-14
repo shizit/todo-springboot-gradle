@@ -1,0 +1,36 @@
+.container-grid3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 50px;
+	margin: 50px;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+.item-grid3 {
+	background: #EEE;
+	color: #000;
+	padding: 10px;
+}
+.task-incomplete {
+	list-style: none;
+	background: #E1A5CB;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.task-running {
+	background: #97D3E3;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.task-completed {
+	background: #A6E39D;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}

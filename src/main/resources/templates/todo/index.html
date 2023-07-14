@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Todo Application</h1>
+<p>This is a todo application.</p>
+	<div class="container-grid3">
+		<div class="item-grid3">
+			<div>未実施</div>
+			<div class="container">
+				<button>追加</button>
+				<button>実行中</button>
+				<button>完了</button>
+				<button>削除</button>
+			</div>
+			<ul>
+				<li class="task-incomplete">タスク1</li>
+				<li class="task-incomplete">タスク2</li>
+				<li class="task-incomplete">タスク3</li>
+			</ul>
+		</div>
+		<div class="item-grid3">
+			<div>実行中</div>
+			<div class="container">
+				<button>追加</button>
+				<button>未実施</button>
+				<button>完了</button>
+				<button>削除</button>
+			</div>
+			<ul>
+				<li class="task-running">タスク1</li>
+				<li class="task-running">タスク2</li>
+				<li class="task-running">タスク3</li>
+			</ul>
+		</div>
+		<div class="item-grid3">
+			<div>完了</div>
+			<div class="container">
+				<button>追加</button>
+				<button>未実施</button>
+				<button>実行中</button>
+				<button>削除</button>
+			</div>
+			<ul>
+				<li class="task-completed">タスク1</li>
+				<li class="task-completed">タスク2</li>
+				<li class="task-completed">タスク3</li>
+				<li class="task-completed">タスク4</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
