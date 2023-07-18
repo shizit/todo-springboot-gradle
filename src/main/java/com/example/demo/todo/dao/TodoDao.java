@@ -11,4 +11,6 @@ public interface TodoDao {
 	void addTodo();
 	
 	void deleteTodo(int id);
+	
+	void updateTodo(int id, int status);
 }

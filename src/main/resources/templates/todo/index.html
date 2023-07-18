@@ -17,9 +17,8 @@
 				<div class="container">
 					<input type="submit" name="add" formmethod="post" value="追加">
 					<input type="submit" name="delete" formmethod="post" value="削除">
-					<button>実行中</button>
-					<button>完了</button>
-					<button>削除</button>
+					<input type="submit" name="updateToRunning" formmethod="post" value="実行中">
+					<input type="submit" name="updateToCompleted" formmethod="post" value="完了">
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task incomplete" th:if="${todo.status == 0}">
@@ -30,28 +29,28 @@
 			<div class="item-grid3">
 				<div>実行中</div>
 				<div class="container">
-					<button>追加</button>
-					<button>未実施</button>
-					<button>完了</button>
-					<button>削除</button>
+					<input type="submit" name="add" formmethod="post" value="追加">
+					<input type="submit" name="delete" formmethod="post" value="削除">
+					<input type="submit" name="updateToIncomplete" formmethod="post" value="未実施">
+					<input type="submit" name="updateToCompleted" formmethod="post" value="完了">
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task running" th:if="${todo.status == 1}">
-						<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+						<input type="checkbox" th:text="${todo.name}" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
 					</li>
 				</ul>
 			</div>
 			<div class="item-grid3">
 				<div>完了</div>
 				<div class="container">
-					<button>追加</button>
-					<button>未実施</button>
-					<button>実行中</button>
-					<button>削除</button>
+					<input type="submit" name="add" formmethod="post" value="追加">
+					<input type="submit" name="delete" formmethod="post" value="削除">
+					<input type="submit" name="updateToIncomplete" formmethod="post" value="未実施">
+					<input type="submit" name="updateToRunning" formmethod="post" value="実行中">
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task completed" th:if="${todo.status == 2}">
-						<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+						<input type="checkbox" th:text="${todo.name}" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
 					</li>
 				</ul>
 			</div>

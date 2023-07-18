@@ -47,4 +47,10 @@ public class TodoDaoImpl implements TodoDao {
 		jdbcTemplate.update(sql,id);
 	}
 
+	@Override
+	public void updateTodo(int id,int status) {
+		String sql = "UPDATE TODO SET STATUS = ? WHERE ID = ?";
+		jdbcTemplate.update(sql,status,id);
+	}
+
 }

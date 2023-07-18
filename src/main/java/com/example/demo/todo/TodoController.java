@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.todo.entity.Todo;
 import com.example.demo.todo.form.TodoForm;
 import com.example.demo.todo.service.TodoService;
+import com.example.demo.todo.constant.Status;
 
 @Controller
 @RequestMapping("/")
@@ -45,6 +46,39 @@ public class TodoController {
 		List<Integer> targetIds = form.getCheckTodo();
 		for(Integer targetId: targetIds) {
 			service.deleteTodo(targetId);
+		}
+		List<Todo> todoList = service.getTodos();
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(params="updateToIncomplete", method=RequestMethod.POST)
+	public String updateToInComplete(Model model, TodoForm form, BindingResult result) {
+		List<Integer> targetIds = form.getCheckTodo();
+		for(Integer targetId: targetIds) {
+			service.updateTodo(targetId, Status.INCOMPLETE);
+		}
+		List<Todo> todoList = service.getTodos();
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(params="updateToRunning", method=RequestMethod.POST)
+	public String updateToRunning(Model model, TodoForm form, BindingResult result) {
+		List<Integer> targetIds = form.getCheckTodo();
+		for(Integer targetId: targetIds) {
+			service.updateTodo(targetId, Status.RUNNING);
+		}
+		List<Todo> todoList = service.getTodos();
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(params="updateToCompleted", method=RequestMethod.POST)
+	public String updateToCompleted(Model model, TodoForm form, BindingResult result) {
+		List<Integer> targetIds = form.getCheckTodo();
+		for(Integer targetId: targetIds) {
+			service.updateTodo(targetId, Status.COMPLETED);
 		}
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
