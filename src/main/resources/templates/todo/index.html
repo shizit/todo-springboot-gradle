@@ -10,50 +10,53 @@
 <body>
 	<h1>Todo Application</h1>
 	<p>This is a todo application.</p>
-	<div class="container-grid3">
-		<div class="item-grid3">
-			<div>未実施</div>
-			<div class="container">
-				<button>追加</button>
-				<button>実行中</button>
-				<button>完了</button>
-				<button>削除</button>
+	<form>
+	<div class="container-grid3">		
+			<div class="item-grid3">
+				<div>未実施</div>
+				<div class="container">
+					<input type="submit" name="add" formmethod="post" value="追加">
+					<input type="submit" name="delete" formmethod="post" value="削除">
+					<button>実行中</button>
+					<button>完了</button>
+					<button>削除</button>
+				</div>
+				<ul th:each="todo : ${todoList}" th:object="${todoForm}">
+					<li class="task incomplete" th:if="${todo.status == 0}">
+						<input type="checkbox" th:text="${todo.name}" th:name="test">
+					</li>
+				</ul>
 			</div>
-			<ul th:each="todo : ${todoList}">
-				<li class="task incomplete">
-					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
-				</li>
-			</ul>
-		</div>
-		<div class="item-grid3">
-			<div>実行中</div>
-			<div class="container">
-				<button>追加</button>
-				<button>未実施</button>
-				<button>完了</button>
-				<button>削除</button>
+			<div class="item-grid3">
+				<div>実行中</div>
+				<div class="container">
+					<button>追加</button>
+					<button>未実施</button>
+					<button>完了</button>
+					<button>削除</button>
+				</div>
+				<ul th:each="todo : ${todoList}">
+					<li class="task running" th:if="${todo.status == 1}">
+						<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+					</li>
+				</ul>
 			</div>
-			<ul th:each="todo : ${todoList}">
-				<li class="task running">
-					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
-				</li>
-			</ul>
-		</div>
-		<div class="item-grid3">
-			<div>完了</div>
-			<div class="container">
-				<button>追加</button>
-				<button>未実施</button>
-				<button>実行中</button>
-				<button>削除</button>
+			<div class="item-grid3">
+				<div>完了</div>
+				<div class="container">
+					<button>追加</button>
+					<button>未実施</button>
+					<button>実行中</button>
+					<button>削除</button>
+				</div>
+				<ul th:each="todo : ${todoList}">
+					<li class="task completed" th:if="${todo.status == 2}">
+						<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+					</li>
+				</ul>
 			</div>
-			<ul th:each="todo : ${todoList}">
-				<li class="task completed">
-					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
-				</li>
-			</ul>
 		</div>
-	</div>
+	</form>
 </body>
 
 </html>

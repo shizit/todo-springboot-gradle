@@ -32,16 +32,19 @@ public class TodoDaoImpl implements TodoDao {
 			todo.setName((String) result.get("NAME"));
 			todoList.add(todo);
 		}
-		
-//		Todo todo0 = new Todo(0, 0, "task0");
-//		Todo todo1 = new Todo(1, 1, "task1");
-//		Todo todo2 = new Todo(2, 2, "task2");
-//		List <Todo> todoList = new ArrayList<Todo>();
-//		todoList.add(todo0);
-//		todoList.add(todo1);
-//		todoList.add(todo2);
-		
 		return todoList;
+	}
+
+	@Override
+	public void addTodo() {
+		String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(0, 'NEW TASK')";
+		jdbcTemplate.update(sql);
+	}
+
+	@Override
+	public void deleteTodo(int id) {
+		String sql = "DELETE FROM TODO WHERE ID = ?";
+		jdbcTemplate.update(sql,id);
 	}
 
 }
