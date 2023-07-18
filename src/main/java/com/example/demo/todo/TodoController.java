@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +29,7 @@ public class TodoController {
 	public String index(Model model) {
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
-		
+		model.addAttribute("TodoForm",  new TodoForm());
 		return "todo/index";
 	}
 	@RequestMapping(params="add", method=RequestMethod.POST)
@@ -42,10 +41,13 @@ public class TodoController {
 	}
 	
 	@RequestMapping(params="delete", method=RequestMethod.POST)
-	public String delete(Model model) {
-		service.deleteTodo(7);
+	public String delete(Model model, TodoForm form, BindingResult result) {
+		List<Integer> targetIds = form.getCheckTodo();
+		for(Integer targetId: targetIds) {
+			service.deleteTodo(targetId);
+		}
 		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);		
-		return "todo/index";
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
 	}
 }

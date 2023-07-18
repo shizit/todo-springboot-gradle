@@ -5,13 +5,13 @@ import java.util.List;
 
 public class TodoForm {
 
-	private List<String> checkTodo = new ArrayList<>();
+	private List<Integer> checkTodo = new ArrayList<>();
 
-	public List<String> getCheckTodo() {
+	public List<Integer> getCheckTodo() {
 		return checkTodo;
 	}
 
-	public void setCheckTodo(List<String> checkTodo) {
+	public void setCheckTodo(List<Integer> checkTodo) {
 		this.checkTodo = checkTodo;
 	}
 

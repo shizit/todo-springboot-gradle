@@ -10,7 +10,7 @@
 <body>
 	<h1>Todo Application</h1>
 	<p>This is a todo application.</p>
-	<form>
+	<form th:object="${TodoForm}">
 	<div class="container-grid3">		
 			<div class="item-grid3">
 				<div>未実施</div>
@@ -21,9 +21,9 @@
 					<button>完了</button>
 					<button>削除</button>
 				</div>
-				<ul th:each="todo : ${todoList}" th:object="${todoForm}">
+				<ul th:each="todo : ${todoList}">
 					<li class="task incomplete" th:if="${todo.status == 0}">
-						<input type="checkbox" th:text="${todo.name}" th:name="test">
+						<input type="checkbox" th:text="${todo.name}" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
 					</li>
 				</ul>
 			</div>
