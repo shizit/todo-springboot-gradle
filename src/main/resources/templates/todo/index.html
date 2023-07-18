@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/style.css">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/style.css">
+	<title>Insert title here</title>
 </head>
+
 <body>
-<h1>Todo Application</h1>
-<p>This is a todo application.</p>
+	<h1>Todo Application</h1>
+	<p>This is a todo application.</p>
 	<div class="container-grid3">
 		<div class="item-grid3">
 			<div>未実施</div>
@@ -17,10 +19,10 @@
 				<button>完了</button>
 				<button>削除</button>
 			</div>
-			<ul>
-				<li class="task-incomplete">タスク1</li>
-				<li class="task-incomplete">タスク2</li>
-				<li class="task-incomplete">タスク3</li>
+			<ul th:each="todo : ${todoList}">
+				<li class="task incomplete">
+					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+				</li>
 			</ul>
 		</div>
 		<div class="item-grid3">
@@ -31,10 +33,10 @@
 				<button>完了</button>
 				<button>削除</button>
 			</div>
-			<ul>
-				<li class="task-running">タスク1</li>
-				<li class="task-running">タスク2</li>
-				<li class="task-running">タスク3</li>
+			<ul th:each="todo : ${todoList}">
+				<li class="task running">
+					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+				</li>
 			</ul>
 		</div>
 		<div class="item-grid3">
@@ -45,13 +47,13 @@
 				<button>実行中</button>
 				<button>削除</button>
 			</div>
-			<ul>
-				<li class="task-completed">タスク1</li>
-				<li class="task-completed">タスク2</li>
-				<li class="task-completed">タスク3</li>
-				<li class="task-completed">タスク4</li>
+			<ul th:each="todo : ${todoList}">
+				<li class="task completed">
+					<input type="checkbox" th:text="${todo.name}" th:name="${todo.name}">
+				</li>
 			</ul>
 		</div>
 	</div>
 </body>
+
 </html>

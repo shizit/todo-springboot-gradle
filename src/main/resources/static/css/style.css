@@ -13,24 +13,26 @@ ul {
 	color: #000;
 	padding: 10px;
 }
-.task-incomplete {
-	list-style: none;
+
+.task {
+	list-style: none;	
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+
+.incomplete {
 	background: #E1A5CB;
-	color: #fff;
-	padding: 10px;
-	margin-top: 10px;
+}
+.incomplete:active {
+	background: #D095BA;
 }
 
-.task-running {
+.running {
 	background: #97D3E3;
-	color: #fff;
-	padding: 10px;
-	margin-top: 10px;
 }
 
-.task-completed {
+.completed {
 	background: #A6E39D;
-	color: #fff;
-	padding: 10px;
-	margin-top: 10px;
 }

@@ -1,0 +1,7 @@
+CREATE TABLE todo
+(
+   id INT NOT NULL AUTO_INCREMENT,
+   status INT,
+   name VARCHAR(100) NOT NULL,
+   PRIMARY KEY(id)
+);
