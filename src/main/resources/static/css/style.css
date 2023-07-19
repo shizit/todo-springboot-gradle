@@ -36,3 +36,12 @@ ul {
 .completed {
 	background: #A6E39D;
 }
+
+.textbox {
+	border: none;
+	color: #fff;
+}
+
+.hidden-button {
+	display: none;
+}
