@@ -36,9 +36,14 @@ public class TodoDaoImpl implements TodoDao {
 	}
 
 	@Override
-	public void addTodo(int status) {
-		String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(?, 'NEW TASK')";
-		jdbcTemplate.update(sql, status);
+	public void addTodo(int status, String todoName) {
+		if(todoName != null) {
+			String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(?, ?)";
+			jdbcTemplate.update(sql, status, todoName);
+		} else {
+			String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(?, 'NewTask')";
+			jdbcTemplate.update(sql, status);
+		}
 	}
 
 	@Override

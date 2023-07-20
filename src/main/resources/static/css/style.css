@@ -1,47 +1,68 @@
 .container-grid3 {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 50px;
-	margin: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin: 50px;
 }
+
 ul {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
+
 .item-grid3 {
-	background: #EEE;
-	color: #000;
-	padding: 10px;
+  background: #EEE;
+  color: #000;
+  padding: 10px;
 }
 
 .task {
-	list-style: none;	
-	color: #fff;
-	padding: 10px;
-	margin-top: 10px;
+  list-style: none;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
 }
-
 
 .incomplete {
-	background: #E1A5CB;
+  background: #E1A5CB;
 }
+
 .incomplete:active {
-	background: #D095BA;
+  background: #D095BA;
 }
 
 .running {
-	background: #97D3E3;
+  background: #97D3E3;
 }
 
 .completed {
-	background: #A6E39D;
+  background: #A6E39D;
 }
 
 .textbox {
-	border: none;
-	color: #fff;
+  border: none;
+  color: #fff;
 }
 
 .hidden-button {
-	display: none;
+  display: none;
+}
+
+.modal {
+  display: none;
+  place-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.modal[open] {
+  display: grid;
+}
+.modal[open]:modal {
+  background-color: transparent;
+}
+.modal[open]:modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
 }

@@ -31,14 +31,14 @@ public class TodoController {
 	public String index(Model model) {
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
-		model.addAttribute("TodoForm",  new TodoForm());
+		model.addAttribute("todoForm",  new TodoForm());
 		return "todo/index";
 	}
 	@PostMapping("/updateTodoName")
 	public String test(Model model) {
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
-		model.addAttribute("TodoForm",  new TodoForm());
+		model.addAttribute("todoForm",  new TodoForm());
 		return "todo/index";
 	}
 	
@@ -46,27 +46,27 @@ public class TodoController {
 	public String updateTodoName(Model model, TodoForm form, BindingResult result) {
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
-		model.addAttribute("TodoForm",  new TodoForm());
+		model.addAttribute("todoForm",  new TodoForm());
 		return "redirect:/";
 	}
 
 	@PostMapping("/addIncomplete")
-	public String addIncomplete(Model model) {
-		service.addTodo(Status.INCOMPLETE);
+	public String addIncomplete(Model model, TodoForm todoForm) {
+		service.addTodo(Status.INCOMPLETE, todoForm.getTodoName());
 		List<Todo> todoList = service.getTodos();	
 		model.addAttribute("todoList",todoList);
 		return "redirect:/";
 	}
 	@PostMapping("/addRunning")
-	public String addRunning(Model model) {
-		service.addTodo(Status.RUNNING);
+	public String addRunning(Model model, TodoForm todoForm) {
+		service.addTodo(Status.RUNNING, todoForm.getTodoName());
 		List<Todo> todoList = service.getTodos();	
 		model.addAttribute("todoList",todoList);
 		return "redirect:/";
 	}
 	@PostMapping("/addCompleted")
-	public String addCompleted(Model model) {
-		service.addTodo(Status.COMPLETED);
+	public String addCompleted(Model model, TodoForm todoForm) {
+		service.addTodo(Status.COMPLETED, todoForm.getTodoName());
 		List<Todo> todoList = service.getTodos();	
 		model.addAttribute("todoList",todoList);
 		return "redirect:/";

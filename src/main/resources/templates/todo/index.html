@@ -5,12 +5,36 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/style.css">
 	<title>Insert title here</title>
+	<script>
+	const btns = document.querySelectorAll("button");
+	const close = document.getElementById("close");
+	const modal = document.getElementById("modal");
+
+	btns.forEach((btn) => {
+	btn.addEventListener("click", () => {
+	  if (btn.getAttribute("data-modal") === 'true') {
+	     modal.showModal();  // :modalとして分類される
+	  } else {
+	    modal.show();  // :modalとして分類されない
+	  }
+	});
+	})
+	
+	close.addEventListener("click", () => {
+	  modal.close();
+	});
+	
+	modal.addEventListener("click", (e) => {
+			if (e.target === modal) modal.close();
+	});
+	</script>
 </head>
 
 <body>
 	<h1>Todo Application</h1>
 	<p>This is a todo application.</p>
-	<form th:object="${TodoForm}">
+	<form th:object="${todoForm}">
+		<label>追加タスク名：</label><input type="text" th:field="${todoForm.todoName}">
 		<button formaction="/updateTodoName" formmethod="post" class="hidden-button"></button>
 		<div class="container-grid3">
 			<div class="item-grid3">
@@ -23,7 +47,7 @@
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task incomplete" th:if="${todo.status == 0}">
-						<input type="checkbox" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
+						<input type="checkbox" th:value="${todo.id}" th:field="${todoForm.checkTodo}">
 						<input type="text" th:value="${todo.name}" class="textbox incomplete">
 					</li>
 				</ul>
@@ -38,7 +62,7 @@
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task running" th:if="${todo.status == 1}">
-						<input type="checkbox" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
+						<input type="checkbox" th:value="${todo.id}" th:field="${todoForm.checkTodo}">
 						<input type="text" th:value="${todo.name}" class="textbox running">
 					</li>
 				</ul>
@@ -53,13 +77,28 @@
 				</div>
 				<ul th:each="todo : ${todoList}">
 					<li class="task completed" th:if="${todo.status == 2}">
-						<input type="checkbox" th:value="${todo.id}" th:field="${TodoForm.checkTodo}">
+						<input type="checkbox" th:value="${todo.id}" th:field="${todoForm.checkTodo}">
 						<input type="text" th:value="${todo.name}" class="textbox completed">
 					</li>
 				</ul>
 			</div>
 		</div>
+		<button class="btn" data-modal="true">:modal を使用</button>
 	</form>
+		<dialog id="modal" class="modal">
+			<div class="content">
+				<h2 class="title">タイトルタイトルタイトル</h2>
+				<div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+					voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+				<button id="close" class="close">
+					<span class="line line--top"></span>
+					<span class="line line--bottom"></span>
+				</button>
+			</div>
+		</dialog>
 </body>
 
 </html>

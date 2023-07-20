@@ -25,8 +25,8 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public void addTodo(int status) {
-		dao.addTodo(status);
+	public void addTodo(int status, String todoName) {
+		dao.addTodo(status, todoName);
 		
 	}
 
