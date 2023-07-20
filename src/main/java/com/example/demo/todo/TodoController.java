@@ -50,9 +50,23 @@ public class TodoController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/add")
-	public String add(Model model) {
-		service.addTodo();
+	@PostMapping("/addIncomplete")
+	public String addIncomplete(Model model) {
+		service.addTodo(Status.INCOMPLETE);
+		List<Todo> todoList = service.getTodos();	
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
+	}
+	@PostMapping("/addRunning")
+	public String addRunning(Model model) {
+		service.addTodo(Status.RUNNING);
+		List<Todo> todoList = service.getTodos();	
+		model.addAttribute("todoList",todoList);
+		return "redirect:/";
+	}
+	@PostMapping("/addCompleted")
+	public String addCompleted(Model model) {
+		service.addTodo(Status.COMPLETED);
 		List<Todo> todoList = service.getTodos();	
 		model.addAttribute("todoList",todoList);
 		return "redirect:/";
