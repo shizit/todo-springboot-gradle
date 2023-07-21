@@ -1,9 +1,7 @@
 package com.example.demo.todo.dao;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.repository.TodoMapper;
 import com.example.demo.todo.entity.Todo;
 
 @Repository
@@ -19,36 +18,29 @@ public class TodoDaoImpl implements TodoDao {
 
 	private final JdbcTemplate jdbcTemplate;
 	private final NamedParameterJdbcTemplate  namedJdbcTemplate;
+	private final TodoMapper todoMapper;
+	
 	@Autowired
-	public TodoDaoImpl (JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedJdbcTemplate) {
+	public TodoDaoImpl (
+		JdbcTemplate jdbcTemplate, 
+		NamedParameterJdbcTemplate namedJdbcTemplate, 
+		TodoMapper todoMapper ){
 		this.jdbcTemplate = jdbcTemplate;
 		this.namedJdbcTemplate = namedJdbcTemplate;
+		this.todoMapper = todoMapper;
 	}
 	
 	@Override
 	public List<Todo> getTodos() {
-		String sql = "SELECT ID, STATUS, NAME FROM TODO";
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
-		List<Todo> todoList = new ArrayList<Todo>();
-		for(Map<String, Object> result : resultList) {
-			Todo todo = new Todo();
-			todo.setId((int) result.get("ID"));
-			todo.setStatus((int) result.get("STATUS"));
-			todo.setName((String) result.get("NAME"));
-			todoList.add(todo);
-		}
-		return todoList;
+		return todoMapper.findAll();
 	}
 
 	@Override
 	public void addTodo(int status, String todoName) {
-		if(todoName != null && todoName != "") {
-			String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(?, ?)";
-			jdbcTemplate.update(sql, status, todoName);
-		} else {
-			String sql = "INSERT INTO TODO (STATUS, NAME) VALUES(?, 'NewTask')";
-			jdbcTemplate.update(sql, status);
-		}
+		Todo todo = new Todo();
+		todo.setStatus(status);
+		todo.setName(todoName);
+		todoMapper.insert(todo);
 	}
 
 	@Override

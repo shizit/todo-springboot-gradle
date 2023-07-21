@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.todo.constant.Status;
 import com.example.demo.todo.entity.Todo;
@@ -28,7 +27,7 @@ public class TodoController {
 	}
 	
 	@GetMapping
-	public String index(Model model) {
+	public String index(Model model) {	
 		List<Todo> todoList = service.getTodos();
 		model.addAttribute("todoList",todoList);
 		model.addAttribute("todoForm",  new TodoForm());
