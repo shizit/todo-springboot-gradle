@@ -10,7 +10,7 @@ public interface TodoDao {
 	
 	void addTodo(int status, String todoName);
 	
-	void deleteTodo(int id);
+	void deleteTodo(List<Integer> ids);
 	
 	void updateTodo(int id, int status);
 }

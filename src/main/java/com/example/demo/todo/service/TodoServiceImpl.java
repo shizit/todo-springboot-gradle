@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.todo.constant.Status;
 import com.example.demo.todo.dao.TodoDao;
 import com.example.demo.todo.entity.Todo;
 
@@ -31,13 +32,15 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public void deleteTodo(int id) {
-		dao.deleteTodo(id);
+	public void deleteTodo(List<Integer> ids) {
+		dao.deleteTodo(ids);
 	}
 
 	@Override
-	public void updateTodo(int id, int status) {
-		dao.updateTodo(id, status);
+	public void updateTodo(List<Integer> ids, int status) {
+		for(Integer id: ids) {
+			dao.updateTodo(id, status);
+		}
 	}
 	
 }

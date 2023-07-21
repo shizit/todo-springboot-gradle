@@ -1,11 +1,15 @@
 package com.example.demo.todo.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.todo.entity.Todo;
@@ -14,10 +18,11 @@ import com.example.demo.todo.entity.Todo;
 public class TodoDaoImpl implements TodoDao {
 
 	private final JdbcTemplate jdbcTemplate;
-	
+	private final NamedParameterJdbcTemplate  namedJdbcTemplate;
 	@Autowired
-	public TodoDaoImpl (JdbcTemplate jdbcTemplate) {
+	public TodoDaoImpl (JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedJdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.namedJdbcTemplate = namedJdbcTemplate;
 	}
 	
 	@Override
@@ -47,9 +52,17 @@ public class TodoDaoImpl implements TodoDao {
 	}
 
 	@Override
-	public void deleteTodo(int id) {
-		String sql = "DELETE FROM TODO WHERE ID = ?";
-		jdbcTemplate.update(sql,id);
+	public void deleteTodo(List<Integer> ids) {
+		String sql = "DELETE FROM TODO WHERE ID IN(:ids)";
+		
+		Set<Integer> idSet = new HashSet<>();
+	    for(Integer i: ids) {
+	    	idSet.add(i);
+	    }
+	    MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("ids", idSet);
+		
+	    namedJdbcTemplate.update(sql, parameters);
 	}
 
 	@Override

@@ -47,22 +47,3 @@ ul {
 .hidden-button {
   display: none;
 }
-
-.modal {
-  display: none;
-  place-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-.modal[open] {
-  display: grid;
-}
-.modal[open]:modal {
-  background-color: transparent;
-}
-.modal[open]:modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.7);
-}

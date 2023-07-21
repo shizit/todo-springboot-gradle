@@ -34,85 +34,48 @@ public class TodoController {
 		model.addAttribute("todoForm",  new TodoForm());
 		return "todo/index";
 	}
-	@PostMapping("/updateTodoName")
+	@PostMapping("/enterEmpty")
 	public String test(Model model) {
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
-		model.addAttribute("todoForm",  new TodoForm());
-		return "todo/index";
-	}
-	
-	@RequestMapping(params="updateTodoName", method=RequestMethod.POST)
-	public String updateTodoName(Model model, TodoForm form, BindingResult result) {
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
-		model.addAttribute("todoForm",  new TodoForm());
 		return "redirect:/";
 	}
 
 	@PostMapping("/addIncomplete")
 	public String addIncomplete(Model model, TodoForm todoForm) {
 		service.addTodo(Status.INCOMPLETE, todoForm.getTodoName());
-		List<Todo> todoList = service.getTodos();	
-		model.addAttribute("todoList",todoList);
 		return "redirect:/";
 	}
 	@PostMapping("/addRunning")
 	public String addRunning(Model model, TodoForm todoForm) {
 		service.addTodo(Status.RUNNING, todoForm.getTodoName());
-		List<Todo> todoList = service.getTodos();	
-		model.addAttribute("todoList",todoList);
 		return "redirect:/";
 	}
 	@PostMapping("/addCompleted")
 	public String addCompleted(Model model, TodoForm todoForm) {
 		service.addTodo(Status.COMPLETED, todoForm.getTodoName());
-		List<Todo> todoList = service.getTodos();	
-		model.addAttribute("todoList",todoList);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/delete")
 	public String delete(Model model, TodoForm form, BindingResult result) {
-		List<Integer> targetIds = form.getCheckTodo();
-		for(Integer targetId: targetIds) {
-			service.deleteTodo(targetId);
-		}
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
+		service.deleteTodo(form.getCheckTodo());
 		return "redirect:/";
 	}
 
 	@PostMapping("/updateToIncomplete")
 	public String updateToInComplete(Model model, TodoForm form, BindingResult result) {
-		List<Integer> targetIds = form.getCheckTodo();
-		for(Integer targetId: targetIds) {
-			service.updateTodo(targetId, Status.INCOMPLETE);
-		}
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
+		service.updateTodo(form.getCheckTodo(), Status.INCOMPLETE);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/updateToRunning")
 	public String updateToRunning(Model model, TodoForm form, BindingResult result) {
-		List<Integer> targetIds = form.getCheckTodo();
-		for(Integer targetId: targetIds) {
-			service.updateTodo(targetId, Status.RUNNING);
-		}
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
+		service.updateTodo(form.getCheckTodo(), Status.RUNNING);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/updateToCompleted")
 	public String updateToCompleted(Model model, TodoForm form, BindingResult result) {
-		List<Integer> targetIds = form.getCheckTodo();
-		for(Integer targetId: targetIds) {
-			service.updateTodo(targetId, Status.COMPLETED);
-		}
-		List<Todo> todoList = service.getTodos();
-		model.addAttribute("todoList",todoList);
+		service.updateTodo(form.getCheckTodo(), Status.COMPLETED);
 		return "redirect:/";
 	}
 }
